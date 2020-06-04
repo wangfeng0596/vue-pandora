@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-04 11:24:17
+ * @LastEditTime: 2020-06-04 14:26:10
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue-pandora-master\packages\Form\text.vue
+--> 
 <template>
   <el-input
     v-model="value"
@@ -8,10 +16,12 @@
     :type="option.type"
     :maxlength="option.maxlength"
     :rows="option.rows"
+    @input="inputHandler"
   ></el-input>
 </template>
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
+import { isFunction } from '@/utils/common'
 @Component({
   components: {}
 })
@@ -71,6 +81,17 @@ export default class VInput extends Vue {
   // 设置是或否禁用
   setDisabled(bol: boolean) {
     this.disabled = bol
+  }
+  /**
+   * @name:
+   * @param {val}
+   * @return:
+   * @description: 在 Input 值改变时触发
+   */
+  inputHandler(val: string) {
+    if (this.option.input && isFunction(this.option.input)) {
+      this.option.input(val)
+    }
   }
 }
 </script>

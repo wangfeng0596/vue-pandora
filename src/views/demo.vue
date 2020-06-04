@@ -135,7 +135,10 @@ export default class Demo extends Vue {
           disabled: false,
           show: true,
           placeholder: '',
-          value: ''
+          value: '',
+          input(val: any) {
+            console.log(val)
+          }
         }
       },
       {
